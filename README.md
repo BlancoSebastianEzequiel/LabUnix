@@ -1,5 +1,5 @@
 # Lab1UnixSyscalls
-Lab 1 de la materia Sistemas Operativos, 1° C 2018, FIUBA
+Lab 1 de la materia Sistemas Operativos, 1° C 2018, FIUBA\n
 Lab Unix
 El objetivo de este lab es tener un primer contacto con la interfaz del kernel mediante syscalls tradicionales de Unix, en particular las relacionadas al manejo de archivos.
 
