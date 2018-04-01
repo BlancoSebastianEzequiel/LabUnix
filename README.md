@@ -47,7 +47,7 @@ El siguiente esqueleto de un comando que acepta un único parámetro puede usars
 #include <...>
 
 void rm0(const char *file) {  
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp// ...  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// ...  
 }  
 
 int main(int argc, char *argv[]) {  
