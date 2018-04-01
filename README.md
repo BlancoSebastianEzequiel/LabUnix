@@ -64,15 +64,11 @@ El uso estándar rm <file> permite borrar solo archivos regulares, y arrojará e
 
 Para la implementación de rm0 solo se considerará el caso de archivos regulares.
 
-$ ls
-
-archivo1   archivo2   directorio1   rm0
-
-$ ./rm0 archivo1
-
-$ ls
-
-archivo2   directorio1   rm0
+$ ls \r\n.
+archivo1   archivo2   directorio1   rm0 \r\n.
+$ ./rm0 archivo1 \r\n.
+$ ls \r\n.
+archivo2   directorio1   rm0 \r\n.
 
 Se pide: implementar rm0 que elimina un archivo regular.
 
@@ -83,8 +79,9 @@ Syscalls recomendadas: unlink.
 ### cat0 ☆
 cat (concatenate) es una herramienta unix que permite concatenar archivos y mostrarlos por salida estándar. En este lab se implementará una vesión simplificada de cat, que muestra en pantalla los contenidos de un único archivo.
 
-$ cat ejemplo.txt
-Sistemas Operativos, 1er cuatrimestre 2018
+$ cat ejemplo.txt \r\n.
+Sistemas Operativos, 1er cuatrimestre 2018 \r\n.
+
 Se pide: Implementar cat0 que toma un archivo regular y muestra su contenido por salida estándar.
 
 Pre-condición: solo se pasa un archivo, este archivo existe y se tienen permisos de lectura.
@@ -98,17 +95,18 @@ No obstante, el uso más común del comando touch es la creación de archivos re
 
 Se pide: Implementar touch0 que toma como parámetro un archivo y lo crea en caso de que no exista (el archivo creado debe estar en blanco). Si el archivo ya existía, no se hace nada.
 
-Ejemplo:
+Ejemplo: \r\n.
 
-$ ls
-touch0
-$ ./touch0 un_archivo
-$ ls
-touch0 un_archivo
-$ stat un_archivo
-  File: un_archivo
-  Size: 0     Blocks: 0    IO Block: 4096   regular empty file
-[...]
+$ ls \r\n.
+touch0 \r\n.
+$ ./touch0 un_archivo \r\n.
+$ ls \r\n.
+touch0 un_archivo \r\n.
+$ stat un_archivo \r\n.
+  File: un_archivo \r\n.
+  Size: 0     Blocks: 0    IO Block: 4096   regular empty file \r\n.
+[...] \r\n.
+
 Notar que el tamaño del archivo creado es 0, y stat también nos lo indica enunciando regular empty file.
 
 Pre-condición: si el archivo existe, es un archivo regular.
