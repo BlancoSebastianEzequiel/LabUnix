@@ -13,22 +13,22 @@ las instrucciones de entrega en papel.
 Syscalls UNIX
 Esqueleto y flags de compilación
 * Parte 1
-* rm0 ☆
-* cat0 ☆
-* touch0 ☆
-* stat0 ☆☆
-* rm1 ★
+  * rm0 ☆
+  * cat0 ☆
+  * touch0 ☆
+  * stat0 ☆☆
+  * rm1 ★
 * Parte 2
-* ln0 ☆
-* mv0 ☆
-* cp0 ☆☆	
-* touch1 ★
-* ln1 ★
+  * ln0 ☆
+  * mv0 ☆
+  * cp0 ☆☆	
+  * touch1 ★
+  * ln1 ★
 * Parte 3
-* tee0 ☆☆
-* ls0 ☆☆☆
-* cp1 ☆☆☆
-* ps0 ★★
+  * tee0 ☆☆
+  * ls0 ☆☆☆
+  * cp1 ☆☆☆
+  * ps0 ★★
 
 ### Syscalls UNIX
 Se debe implementar cada ejercicio usando las syscalls Unix apropiadas, evitando el uso de las “funciones de alto nivel” que proporciona la biblioteca estándar de C. Así, por ejemplo, para la apertura de archivos se debe usar la syscall open(2), y no la función fopen(3).
@@ -65,10 +65,15 @@ El uso estándar rm <file> permite borrar solo archivos regulares, y arrojará e
 Para la implementación de rm0 solo se considerará el caso de archivos regulares.
 
 $ ls
+
 archivo1   archivo2   directorio1   rm0
+
 $ ./rm0 archivo1
+
 $ ls
+
 archivo2   directorio1   rm0
+
 Se pide: implementar rm0 que elimina un archivo regular.
 
 Pre-condición: el archivo existe y es regular.
