@@ -1,36 +1,36 @@
 # Lab1UnixSyscalls
 Lab 1 de la materia Sistemas Operativos, 1° C 2018, FIUBA
-##Lab Unix
+## Lab Unix
 El objetivo de este lab es tener un primer contacto con la interfaz del kernel mediante syscalls tradicionales de Unix, en particular las relacionadas al manejo de archivos.
 
 El lab consiste en la implementación de versiones simplificadas de las herramientas Unix más comunes provistas en cualquier distribución: ls, cat, rm, cp, mv, etc.
 
-###Enlaces recomendados:
+### Enlaces recomendados:
 
 el régimen de cursada, donde se explica la notación ☆/★
 las instrucciones de entrega en papel.
 Índice
 Syscalls UNIX
 Esqueleto y flags de compilación
-*Parte 1
-	*rm0 ☆
-	*cat0 ☆
-	*touch0 ☆
-	*stat0 ☆☆
-	*rm1 ★
-*Parte 2
-	*ln0 ☆
-	*mv0 ☆
-	*cp0 ☆☆	
-	*touch1 ★
-	*ln1 ★
-*Parte 3
-	*tee0 ☆☆
-	*ls0 ☆☆☆
-	*cp1 ☆☆☆
-	*ps0 ★★
+* Parte 1
+* rm0 ☆
+* cat0 ☆
+* touch0 ☆
+* stat0 ☆☆
+* rm1 ★
+* Parte 2
+* ln0 ☆
+* mv0 ☆
+* cp0 ☆☆	
+* touch1 ★
+* ln1 ★
+* Parte 3
+* tee0 ☆☆
+* ls0 ☆☆☆
+* cp1 ☆☆☆
+* ps0 ★★
 
-###Syscalls UNIX
+### Syscalls UNIX
 Se debe implementar cada ejercicio usando las syscalls Unix apropiadas, evitando el uso de las “funciones de alto nivel” que proporciona la biblioteca estándar de C. Así, por ejemplo, para la apertura de archivos se debe usar la syscall open(2), y no la función fopen(3).
 
 Sí se permite el uso de funciones de la biblioteca estándar para trabajar con strings y para mostrar información por pantalla. Así, por ejemplo, para escribir en la consola se puede usar printf(3) en lugar de write(2).
@@ -55,8 +55,9 @@ int main(int argc, char *argv[]) {
 }
 Se recomienda compilar utilizando los flags -std=c11 -Wall -Wextra -g.
 
-##Parte 1
-###rm0 ☆
+## Parte 1
+
+### rm0 ☆
 rm (remove) es la herramienta unix que permite eliminar archivos y directorios.
 
 El uso estándar rm <file> permite borrar solo archivos regulares, y arrojará error si se intenta eliminar un directorio.
@@ -74,7 +75,7 @@ Pre-condición: el archivo existe y es regular.
 
 Syscalls recomendadas: unlink.
 
-###cat0 ☆
+### cat0 ☆
 cat (concatenate) es una herramienta unix que permite concatenar archivos y mostrarlos por salida estándar. En este lab se implementará una vesión simplificada de cat, que muestra en pantalla los contenidos de un único archivo.
 
 $ cat ejemplo.txt
@@ -85,7 +86,7 @@ Pre-condición: solo se pasa un archivo, este archivo existe y se tienen permiso
 
 Syscalls recomendadas: open, read, write, close.
 
-###touch0 ☆
+### touch0 ☆
 touch toma como parámetro un archivo (de cualquier tipo) y permite actualizar su metadata, especialmente las fechas de último acceso (atime) y última modificación (mtime); ambos atributos pueden verse mediante el comando stat. Una llamada a touch sobre un archivo actualiza ambas fechas al tiempo actual.
 
 No obstante, el uso más común del comando touch es la creación de archivos regulares: si el parámetro referencia a un archivo que no existe, se lo crea. La primera versión touch0 sólo implementará esta funcionalidad de touch.
@@ -109,7 +110,7 @@ Pre-condición: si el archivo existe, es un archivo regular.
 
 Syscalls recomendadas: open.
 
-###stat0 ☆☆
+### stat0 ☆☆
 stat muestra en pantalla los metadatos de un archivo, incluyendo información sobre tipo de archivo, fechas de creación y modificación, permisos, etc.
 
 $ stat README.md
@@ -133,15 +134,15 @@ Pre-condición: el archivo existe, y es un directorio o un archivo regular.
 
 Syscalls recomendadas: stat. Se puede consultar también la página de manual inode(7).
 
-###rm1 ★
+### rm1 ★
 Mostrar cómo se usaría errno y perror(3) para obtener el siguiente comportamiento de rm:
 
 $ ./rm1 directorio1
 rm: cannot remove 'directorio1': Is a directory
 
-###Parte 2
+### Parte 2
 
-##ln0 ☆
+## ln0 ☆
 ln (link) permite la creación de enlaces a archivos, tanto “hard links” como “soft links”. Por defecto el uso de ln toma dos parámetros, el objetivo del link y el nombre; y crea un hard link. Puede usarse el flag -s (o –symbolic) para crear enlaces simbólicos (“soft links”).
 
 La implementación de ln0 replicará el comportamiento de ln -s, permitiendo crear solamente enlaces simbólicos. Un uso de ln0 podría ser:
@@ -165,7 +166,7 @@ Syscalls recomendadas: symlink.
 
 Pregunta: ¿Qué ocurre si se intenta crear un enlace a un archivo que no existe?
 
-###mv0 ☆
+### mv0 ☆
 mv (move) permite mover un archivo (regular o directorio) de un directorio a otro. El archivo no se mueve físicamente sino que sólo se renombra y se modifica el enlace al mismo en su directorio actual. La implementación de mv0 tendrá la misma funcionalidad que mv.
 
 Un ejemplo del uso de mv0 podría ser:
@@ -186,7 +187,7 @@ Syscalls recomendadas: rename.
 
 Pregunta: ¿se puede usar mv0 para renombrar archivos dentro del mismo directorio?
 
-###cp0 ☆☆
+### cp0 ☆☆
 cp (copy) es el comando de Unix que permite copiar archivos. La sintaxis toma como parámetros dos archivos regulares, y copia los contenidos del primero al segundo. Si el segundo archivo no existe, es creado; y si ya existía, sus contenidos se sobreescriben.
 
 El uso de cp sin flags adicionales sólo permite copiar archivos regulares, aunque puede especificarse el flag -r para copiar directorios de manera recursiva. La implementación de cp0 sólo tendrá en cuenta el caso de copiar archivos regulares.
@@ -206,7 +207,7 @@ Se pide: Implementar cp0 que copia los contenidos de un archivo a otro. Utilizar
 
 Pre-condición: el archivo de origen existe y es regular. El archivo destino no existe.
 
-###touch1 ★
+### touch1 ★
 Revisitar la implementación de touch0 realizada en los puntos anteriores y agregarle la funcionalidad de actualización de las fechas en la metadata de un archivo en caso de que ya exista. Tal metadata puede verse mediante el comando stat.
 
 Un ejemplo del uso de touch1 sería:
@@ -230,7 +231,7 @@ Implementar touch1 que toma un archivo como parámetro. Si no existe, crea un ar
 
 Syscalls recomendadas: utime(2) y la función futimes(3).
 
-###ln1 ★
+### ln1 ★
 Implementar una versión ln1 que cree hard links en lugar de soft links. Hacer uso de la syscall link(2). Luego, teniendo las dos versiones, responder las siguientes preguntas:
 
 ¿Cuál es la diferencia entre un hard link y un soft link?
@@ -243,8 +244,9 @@ Explicar las diferencias.
 
 Syscalls recomendadas: link(2), symlink(2)
 
-##Parte 3
-###tee0 ☆☆
+## Parte 3
+
+### tee0 ☆☆
 tee (conector T) toma como parámetro un archivo, y escribe todo lo que llega por entrada estándar, tanto en la salida estándar como al archivo. Resulta muy útil cuando se quiere ver el resultado de la ejecución de un programa y a su vez guardar una copia de todo lo que escriba en un archivo.
 
 Un ejemplo del uso de tee podría ser:
@@ -259,7 +261,7 @@ Implementar tee0 que transcribe la entrada estándar tanto en la salida estánda
 
 Pre-condición: el archivo o bien no existe, o bien es un archivo regular.
 
-###ls0 ☆☆☆
+### ls0 ☆☆☆
 ls (list) lista los contenidos del directorio que se le pase por parámetro. Si no se especifica ningún parámetro, ls muestra el contenido de los archivos en el directorio actual (ver pwd(1)).
 
 El comando ls admite una gran variedad de flags para elegir qué información se mostrará de los archivos, con qué formato y orden. La implementación de ls0 se corresponderá con ls -U1, o lo que es equivalente ls --format=single-column --sort=none, que lista únciamente los nombres de los archivos, sin ningún ordenamiento particular y de a uno por línea.
@@ -277,7 +279,7 @@ Se pide: Implementar ls0 que lista todos los archivos en el directorio actual, u
 
 Funciones recomendadas: stat(2), opendir(3), readdir(3), closedir(3).
 
-###cp1 ☆☆☆
+### cp1 ☆☆☆
 La syscall mmap permite mapear una región de los contenidos de un archivo a memoria, y acceder a los mismos directamente como si fuera un array de bytes. Si se utilizan los flags apropiados (MAP_SHARED, ver mmap(2)) los cambios en la memoria correspondiente al archivo se verán reflejados en el mismo.
 
 Si bien el uso de las syscall de entrada y salida básicas es la implementación más común para cp, también es posible utilizar mmap para copiar archivos. La idea es crear un archivo nuevo, y mapear tanto el archivo origen como el destino a regiones de memoria distintas, luego copiar los datos en memoria de una región a la otra (por ejemplo, utilizando memcpy).
@@ -288,7 +290,7 @@ Implementar cp1, que debe tener la misma funcionalidad que cp0 pero implementada
 
 Syscalls recomendadas: mmap(2), memcpy(2), open(2)
 
-###ps0 ★★
+### ps0 ★★
 ps (proccess status) es un comando unix que permite obtener todo tipo de información acerca de los procesos que están corriendo actualmente, disponiendo de muchos flags que alteran la cantidad de información a mostrar. Ver ps(1) para la lista completa de flags.
 
 Toda esta información se obtiene del pseudo-filesystem /proc, que mantiene acceso de sólo lectura a muchas estructuras de control del kernel relacionadas con procesos. En particular, los datos de cada proceso se encuentran en el subdirectorio /proc/[pid], siendo pid el proccess ID del proceso.
