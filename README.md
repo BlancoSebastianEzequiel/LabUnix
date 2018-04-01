@@ -51,7 +51,7 @@ void rm0(const char *file) {
 }  
 
 int main(int argc, char *argv[]) {  
-    rm0(argv[1]);  
+t\rm0(argv[1]);  
 }  
 
 Se recomienda compilar utilizando los flags -std=c11 -Wall -Wextra -g.
