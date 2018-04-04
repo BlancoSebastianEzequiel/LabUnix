@@ -1,4 +1,4 @@
-´´´#define _POSIX_C_SOURCE 200809L
+```#define _POSIX_C_SOURCE 200809L
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -28,4 +28,4 @@ int main(int argc, char* argv[]) {
     return cat0(argv[1]);
 }
 //------------------------------------------------------------------------------
-´´´
+```
