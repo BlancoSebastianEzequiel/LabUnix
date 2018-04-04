@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
-#include "functions.h"
+#include "general.h"
 //------------------------------------------------------------------------------
 // CAT 0
 //------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ int main(int argc, char* argv[]) {
 #include <stdio.h>
 #include <errno.h>
 //------------------------------------------------------------------------------
-// STAT0
+// TOUCH0
 //------------------------------------------------------------------------------
 int stat0(const char* file) {
     //Pre: el archivo existe, y es un directorio o un archivo regular.
@@ -247,7 +247,7 @@ int main(int argc, char* argv[]) {
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/stat.h>
-#include "functions.h"
+#include "general.h"
 //------------------------------------------------------------------------------
 // CP0
 //------------------------------------------------------------------------------
@@ -344,7 +344,7 @@ int main(int argc, char* argv[]) {
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
-#include "functions.h"
+#include "general.h"
 //------------------------------------------------------------------------------
 // TEE0
 //------------------------------------------------------------------------------
@@ -391,7 +391,7 @@ int main(int argc, char* argv[]) {
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
-#include "functions.h"
+#include "general.h"
 //------------------------------------------------------------------------------
 // WRITE ARCHIVES
 //------------------------------------------------------------------------------
@@ -502,7 +502,7 @@ int main(int argc, char* argv[]) {
 #include <stdbool.h>
 #include <string.h>
 #include <fcntl.h>
-#include "functions.h"
+#include "general.h"
 //------------------------------------------------------------------------------
 // CON CAT DIR
 //------------------------------------------------------------------------------
