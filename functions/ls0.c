@@ -5,7 +5,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
-#include "functions.h"
+#include "general.h"
 //------------------------------------------------------------------------------
 // WRITE ARCHIVES
 //------------------------------------------------------------------------------
