@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <errno.h>
 //------------------------------------------------------------------------------
-// TOUCH0
+// STAT0
 //------------------------------------------------------------------------------
 int stat0(const char* file) {
     //Pre: el archivo existe, y es un directorio o un archivo regular.
