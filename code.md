@@ -575,7 +575,7 @@ int main(int argc, char* argv[]) {
 }
 //------------------------------------------------------------------------------
 ```
-# functions.h
+# general.h
 ```
 #ifndef LAB1_SYSCALLS_H
 #define LAB1_SYSCALLS_H
@@ -610,9 +610,9 @@ int walk(const char *dir, int (*f)(const char* a, const char* father));
 //------------------------------------------------------------------------------
 #endif // LAB1_SYSCALLS_H
 ```
-# functions.c
+# general.c
 ```
-#include "functions.h"
+#include "general.h"
 #include <errno.h>
 #include <stdio.h>
 #include <stdarg.h>
@@ -655,7 +655,7 @@ ssize_t writeArchive(int fd, void *buf, size_t bytes) {
     return bytesWritten;
 }
 //------------------------------------------------------------------------------
-// IS ERROR
+// PERR
 //------------------------------------------------------------------------------
 void perr(const char *format, ...) {
     va_list args;
