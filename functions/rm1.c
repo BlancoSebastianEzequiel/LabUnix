@@ -2,17 +2,14 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#include "general.h"
 //------------------------------------------------------------------------------
 // RM1
 //------------------------------------------------------------------------------
 int rm1(const char* file) {
     //Pre: el archivo existe, y es un directorio o un archivo regular.
     if (unlink(file) == -1) {
-        int bytes = 0;
-        char msg[256];
-        size_t size = strlen("cannot remove ") + strlen(file) + 1;
-        snprintf(msg+bytes, size,"cannot remove %s", file);
-        perror(msg);
+        perr("cannot remove %s", file);
         return 1;
     }
     return 0;

@@ -11,9 +11,8 @@
 //------------------------------------------------------------------------------
 int writeFunctions(const char* dir, const char* father) {
     struct stat buffer;
-    int value = stat(dir, &buffer);
-    if (value == -1) {
-        perror("ERROR with function stat()");
+    if (stat(dir, &buffer) == -1) {
+        perr("ERROR with syscall stat()");
         return 1;
     }
     if ((buffer.st_mode & S_IFMT) != S_IFREG) return 0;

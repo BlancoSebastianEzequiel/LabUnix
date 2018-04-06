@@ -6,9 +6,8 @@
 //------------------------------------------------------------------------------
 int ln1(const char *target, const char *linkPath) {
     // Pre: no existe un archivo con el nombre del enlace.
-    int value =  link(target, linkPath);
-    if (value == -1) {
-        perror("");
+    if (link(target, linkPath) == -1) {
+        perror("ERROR with syscall link");
         return 1;
     }
     return 0;

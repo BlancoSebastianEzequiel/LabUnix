@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <utime.h>
 #include <stdio.h>
-
+#include "general.h"
 //------------------------------------------------------------------------------
 // TOUCH1
 //------------------------------------------------------------------------------
@@ -14,9 +14,8 @@ int touch1(const char* file) {
         fd = open(file, O_CREAT, S_IRWXU);
     }
     else {
-        int value = utime(file, NULL);
-        if (value == -1) {
-            perror("ERROR at function touch0 with utime");
+        if (utime(file, NULL) == -1) {
+            perr("ERROR with syscall utime with file: %s", file);
             return 1;
         }
     }

@@ -5,6 +5,7 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <stdio.h>
+#include "general.h"
 //------------------------------------------------------------------------------
 // FILE SIZE
 //------------------------------------------------------------------------------
@@ -23,18 +24,17 @@ int cp1(const char* file, const char* copy) {
     int mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;  // 0644
     int fdCopy = open(copy, O_RDWR | O_CREAT, mode);
     if (fdCopy == -1) {
-        perror("ERROR: file copy at function open");
+        perr("ERROR: file: %s at syscall open", copy);
         return 1;
     }
 
     size_t length = fileSize(file);
-    int value = truncate(copy, length);
-    if (value == -1) {
-        perror("ERROR: truncate size of file copy");
+    if (truncate(copy, length) == -1) {
+        perr("ERROR: with function truncate with file: %s", copy);
         return 1;
     }
     if (length == 0) {
-        perror("ERROR: File is empty, nothing to do");
+        perr("ERROR: File is empty, nothing to do");
         return 1;
     }
     void *mappedAreaFile;
@@ -42,13 +42,13 @@ int cp1(const char* file, const char* copy) {
 
     mappedAreaFile = mmap(0, length, PROT_READ, MAP_SHARED, fdFile, 0);
     if (mappedAreaFile == MAP_FAILED) {
-        perror("Error mmapping the input file");
+        perr("Error mmapping the stdin file");
         return 1;
     }
 
     mappedAreaCopy = mmap(0, length, PROT_WRITE, MAP_SHARED, fdCopy, 0);
     if (mappedAreaCopy == MAP_FAILED) {
-        perror("Error mmapping the output file");
+        perr("Error mmapping the stdout file");
         return 1;
     }
 

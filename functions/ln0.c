@@ -6,9 +6,8 @@
 //------------------------------------------------------------------------------
 int ln0(const char *target, const char *linkPath) {
     // Pre: no existe un archivo con el nombre del enlace.
-    int value =  symlink(target, linkPath);
-    if (value == -1) {
-        perror("");
+    if (symlink(target, linkPath) == -1) {
+        perror("ERROR with syscall symlink()");
         return 1;
     }
     return 0;

@@ -36,7 +36,7 @@ int printProc(const char* file, const char* father) {
     concatDir(path, file, father);
     int fd = open(path, O_RDONLY);
     if (fd == -1) {
-        perror("ERROR at opening file in function printProc()");
+        perr("ERROR at opening file: %s in function printProc()", file);
         return 1;
     }
     char proc[256];

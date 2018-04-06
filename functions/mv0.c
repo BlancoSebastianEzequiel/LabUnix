@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include "general.h"
 //------------------------------------------------------------------------------
 // MV0
 //------------------------------------------------------------------------------
@@ -14,9 +15,9 @@ int mv0(const char *file, const char *copy) {
     size_t oldSize = strlen("./") + strlen(file) + 1;
     snprintf(oldPath, oldSize,"./%s", file);
 
-    int value = rename(oldPath, newPath);
-    if (value == -1) {
-        perror("ERROR with function rename()");
+    if (rename(oldPath, newPath) == -1) {
+        perr("ERROR: syscall rename. oldpath: %s. newpath: %s",
+             oldPath, newPath);
         return 1;
     }
     return 0;

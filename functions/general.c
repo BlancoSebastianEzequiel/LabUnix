@@ -66,7 +66,7 @@ size_t next(struct dirent** direntStructure, DIR* directoryStream) {
 //------------------------------------------------------------------------------
 // WALK
 //------------------------------------------------------------------------------
-int walk(const char *dir, int (*f)(const char* a, const char* father)) {
+int walk(const char *dir, int (*f)(const char*, const char*)) {
     DIR* directoryStream = opendir(dir);
     if (directoryStream == NULL) {
         perr("ERROR with dir: %s in function opendir()", dir);

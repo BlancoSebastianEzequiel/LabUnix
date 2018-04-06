@@ -7,8 +7,8 @@
 // CAT 0
 //------------------------------------------------------------------------------
 int cat0(const char* pathName) {
-    //pre: solo se pasa un archivo, este archivo existe
-    // y se tienen permisos de lectura.
+    //pre: solo se pasa un archivo, este archivo existe y se tienen permisos
+    // de lectura.
     char buffer[256];
     int fdOut = fileno(stdout);
     int fd = open(pathName, O_RDONLY);
