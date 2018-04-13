@@ -32,9 +32,9 @@ void getFather(char* father, const char* path) {
 //------------------------------------------------------------------------------
 int printProc(const char* file, const char* father) {
     if (strncmp(file, "comm", 4) != 0) return 0;
-    char path[256];
-    concatDir(path, file, father);
-    int fd = open(path, O_RDONLY);
+    char pathComm[256];
+    concatDir(pathComm, file, father);
+    int fd = open(pathComm, O_RDONLY);
     if (fd == -1) {
         perr("ERROR at opening file: %s in function printProc()", file);
         return 1;
@@ -42,14 +42,43 @@ int printProc(const char* file, const char* father) {
     char proc[256];
     ssize_t read = readArchive(fd, proc, 256);
     proc[read] = '\0';
-    if (read == -1) return 1;
+    if (read == -1) {
+        perror("ERROR at reading file comm");
+        return 1;
+    }
     char msg[256];
     char pid[5];
     getFather(pid, father);
-    size_t size = strlen(pid) + (read) + strlen(" ") + 1;
-    snprintf(msg, size, "%s %s\n", pid, proc);
+
+    char pathStat[256];
+    concatDir(pathStat, "stat", father);
+    int fdStat = open(pathStat, O_RDONLY);
+    if (fdStat == -1) {
+        perr("ERROR at opening file stat");
+        return 1;
+    }
+
+    char statContent[256] = {0};
+    if (readArchive(fdStat, statContent, 256) == -1) {
+        perror("ERROR at reading file stat");
+        return 1;
+    }
+
+    char state;
+    int items = sscanf(statContent, "%*d %*s %c", &state);
+
+    if (items != 1) {
+        perr("ERROR processing stat file wit function sscanf()");
+        return 1;
+    }
+
+    size_t size = strlen(pid) + (read) + strlen(" ") + 1 + strlen(" ") + 1;
+    snprintf(msg, size, "%s %c %s\n", pid, state, proc);
     writeArchive(STDOUT_FILENO, msg, size);
-    if (close(fd) == -1) return 1;
+    if (close(fd) == -1 || close(fdStat) == -1) {
+        perr("ERROR closing files");
+        return 1;
+    }
     return 0;
 }
 //------------------------------------------------------------------------------
